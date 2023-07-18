@@ -1,226 +1,137 @@
-<!--suppress ALL -->
+Niniejszy plik _README_ został przetłumaczony na język polski dla wygody użytkowników. Jednak wszystkie strony
+internetowe, do których odnośniki zawiera, są w języku angielskim. [Licencja](LICENSE.md) też jest po angielsku.
+Przynajmniej podstawowa znajomość języka angielskiego jest niezbędna, by zainstalować i korzystać z tego pakietu.
+
+(_The README file has been translated into Polish for the convenience of users. However, all websites it links to are in
+English. The [license file](LICENSE.md) is also in English. At least a basic knowledge of English is required to install
+and use of this package_)
 
 <p align="center">
-    <a href="https://akademiaslaska.pl/" target="_blank">
-        <img src="LOGO.png" alt="Logo of the Silesian Academy" width="210">
-    </a><br />
-    <a href="https://www.yiiframework.com/" target="_blank">
-        <img src="https://www.yiiframework.com/image/yii_logo_light.svg" width="400" alt="Yii Framework" />
-    </a>
-
+    <img src="https://github.com/telecare-poland/test-algorytmu-base64/blob/main/LOGO.png">
+    <h1 align="center">Pseudo-Enkoder PHP</h1>
 </p>
 
-<h1 align="center">Akademia Śląska Template Repository</h1><br />
+## PROJEKT
 
-This is a general overview. For technical information, follow to the [TECH.md](TECH.md) file. For legal stuff -- to [LICENSE.md](LICENSE.md).
+Inspiracja:
 
-This README file is very large. We keep all the technical stuff, information, tools etc. in here. This is intentional.
-We don't want to put this information into Wiki (where it belongs). Wikis are available free of charge only in **public**
-GitHub repos. While most of our repos, created based on this template, will be _private_.
+- [IonCube / PHP Encoder 12](https://www.ioncube.com/php_encoder.php?page=pricing),
+- [Adminer](https://www.adminer.org/en/) (częściowe kodowanie głównego pliku)
 
-This is a template repository that  contains information mostly on technical stuff etc. Feel free to rip off this  part 
-(or any other in this document) and replace it with actual content about your repository.
+Pomysł wykorzystuje:
 
-- [Tools](#tools)
-    * [Passwords and keys](#passwords-and-keys)
-    * [JavaScript and JSON tools](#javascript-and-json-tools)
-    * [Domains](#domains)
-- [Diagrams](#diagrams)
-    * [Example](#example)
-    * [Source code](#source-code)
-    * [Live editor](#live-editor)
-    * [Mermaid Generator](#mermaid-generator)
-    * [Other diagrams](#other-diagrams)
-    * [Kroki.io service](#krokiio-service)
-- [Releases](#releases)
-- [Table of Contents](#table-of-contents)
+- [Yii 2 Micro Framework](https://www.yiiframework.com/doc/guide/2.0/en/tutorial-yii-as-micro-framework)
+- oraz bibliotekę [LZ-based compression algorithm for JavaScript](https://github.com/pieroxy/lz-string/).
 
-This in-line ToC has been generated using [GitHub Wiki TOC generator](https://ecotrust-canada.github.io/markdown-toc/). 
-For details, see [end of this document](#table-of-contents).
+Idea polega na tym, by przeglądarka wyświetlała użytkownikowi w pełni funkcjonalną stronę WWW (z pełnym stylowaniem
+opartym o CSS i działającą logiką, opartą na JavaScript), jednocześnie zawierając "bagno" w kodzie źródłowym.
 
-## Tools 
+Dodatkowym założeniem jest, żeby wszystko było zbudowane na _one-linerze_, czyli zawarte w jednym pliku.
 
-### Passwords and keys
+## WYMAGANIA
 
-If we need to generate some random password or key, the [RandomKeygen](https://randomkeygen.com/) service seems great!
+Poniższe komponenty są wymagane i muszą zostać zainstalowane (jeśli już ich nie posiadasz):
 
-Not only it generates **30+ passwords** at once (with each button press or browser refresh), but it also splits them by function (i.e. _strong passwords_, _memorable 
-passwords_, _WPA_ or _WEP_ keys, etc.).
+1. Lokalny serwer webowy typu LAMP, np. [XAMPP](https://www.apachefriends.org/index.html). Ewentualnie samodzielny
+   interpreter języka PHP w wersji minimum **8.0.0**.
+2. System kontroli zależności [Composer](http://getcomposer.org/).
+3. [Git dla Windows](https://gitforwindows.org/).
+4. Dowolna przeglądarka internetowa we w miarę nowej wersji.
 
-### JavaScript and JSON tools
+Rozwiązanie było testowane wyłącznie w systemie **Windows 11 Pro**, pod kontrolą **PHP 8.2.4**.
 
-Should any of our code include any piece of _JavaScript_ or _JSON_ we can consider these ones:
+## INSTALACJA
 
-- JavaScript:
-    * [ValidateJavaScript](https://validatejavascript.com/): as name says, good and challenging JavaScript linter
-    * [JSCompress](https://jscompress.com/): strong JavaScript compressor (works on in-line code or uploaded files)
-- JSONCompare: [beautify, minify, sort, save](https://jsoncompare.com/#!/simple/) (for sharing) and [lint](https://jsoncompare.com/#!/simple/) 
-or [compare two sets](https://jsoncompare.com/#!/diff/) (can work on files)
+### Instalacja XAMPPa
 
-Note that these are overloaded with ads. But, nothing is for free. Sorry, _taki mamy klimat_.
+Jeśli nie posiadasz zainstalowanego [XAMPPa](https://www.apachefriends.org/index.html), lub dowolnego innego pakietu
+serwerowego typu LAMP, możesz pobrać i zainstalować go ze strony
+internetowej [ApacheFriends.org](https://www.apachefriends.org/download.html).
 
-### Domains
+Jeśli wybierzesz gałąź 8.1 lub 8.0, konieczne będzie użycie flagi `--ignore-platform-req=php` przy korzystaniu z
+Composera, jak to opisano poniżej
+i [tutaj](https://forum.yiiframework.com/t/current-version-of-yii-2-not-ready-for-php-8-2/135156/2?u=trejder).
 
-"_Every good project starts with its own domain name and a logo_" (Tomasz Trejderowski)
+### Instalacja Git for Windows
 
-Should we need to buy some nice, possibly cheap domain name, we can use [this AfterMarket link](https://www.aftermarket.pl/Market/List/?domain=&page=1&length1=&length2=&price1=&price2=777&price3=PLN&extension=&category=&type=listing&start1=&start2=&idn=0&seller=&bin=1&auction=-1&offers=1&hire=0&rental=-1&group=0&lastminute=0&is_catch=0&future=-1&_sort=price-&_count=300&_start=0).
+Jeśli nie masz jeszcze [Git for Windows](https://gitforwindows.org/) lub innej wersji gita, możesz pobrać go z
+ich [strony głównej](https://gitforwindows.org/).
 
-It assumes domains:
+### Instalacja Composera
 
-- Not more expensive than **777 PLN**
-- **Ready to purchase** (direct buy, no auctions)
-- With full **ownership only** (no domain options, no domain lease)
+Jeśli nie posiadasz [Composera](http://getcomposer.org/), instrukcje instalacji znajdziesz na stronie WWW
+[getcomposer.org](http://getcomposer.org/doc/00-intro.md#installation-nix).
 
-And it displays all (most) results on a single page, sorted from cheapest to the most expensive ones.
+### Instalacja projektu przy pomocy Gita i Composera
 
-## Diagrams
+Wykonaj poniższe polecenia w konsoli Windows:
 
-We can use [MermaidJS tool for JavaScript](https://mermaid.js.org/) across entire GitHub (in [issues](https://github.com/ninergames/test-renpy-engine/issues/23),
-[discussions](https://github.com/ninergames/test-renpy-engine/discussions/21) and [in text files](https://github.com/ninergames/test-renpy-engine)).
+~~~
+git clone git@github.com:telecare-poland/test-algorytmu-base64.git
+composer update --ignore-platform-req=php
+~~~
 
-### Example
+Flaga `--ignore-platform-req=php` musi być użyta tylko, jeśli masz
+zainstalowane [PHP w wersji 8.2 lub nowszej](https://forum.yiiframework.com/t/current-version-of-yii-2-not-ready-for-php-8-2/135156/2?u=trejder).
 
-```mermaid
-    flowchart TD
-        A(111) -->|MONEY > 10| B(25)
-        B --> |SSS = 1| C(73)
-        B --> |SSS = 0| D(211)
-        D --> |DIRECTION = Right| E(222)
-        E -->|BATTLE = Won| F(174)
-        E -->|BATTLE = Lost| G(238)    
-        G --> C
-        G --> |"DIRECTION = Left"| D(113)
-        F --> H(151)
-        H --> C
-        click C href "https://mermaid.live/edit" "Mermaid Live Editor"
-```
+## URUCHOMIENIE
 
-The `73` item is clickable and points to → [https://mermaid.live/edit](https://mermaid.live/edit).
+Uruchom swój serwer lokalny lub wykorzystaj serwer wbudowany w PHP:
 
-### Source code
+~~~
+cd htdocs/test-algorytmu-base64
+php yii serve
+~~~
 
-Pure MermaidJS code needed to generate the above diagram is:
+Następnie uruchom wybraną przeglądarkę i przejdź pod adres [`http://localhost:8080`](http://localhost:8080).
 
-    flowchart TD
-        A(111) -->|MONEY > 10| B(25)
-        B --> |SSS = 1| C(73)
-        B --> |SSS = 0| D(211)
-        D --> |DIRECTION = Right| E(222)
-        E -->|BATTLE = Won| F(174)
-        E -->|BATTLE = Lost| G(238)    
-        G --> C
-        G --> |"DIRECTION = Left"| D(113)
-        F --> H(151)
-        H --> C
-        click C href "https://mermaid.live/edit" "Mermaid Live Editor"
+## KONFIGURACJA
 
-If you want to put it anywhere (issue, discussion, wiki) you simply embed it as any regular piece of code in Markdown, 
-telling GitHub in the same time that this code is written in `mermaid` language:
+1. Otwórz stronę dowolnego konwertera base64, np. [Base64 Converter](https://base64.guru/converter).
+2. Wkej dowolny kod HTML i dokonaj jego konwersji na base64.
+3. Zamień **całą zawartość** pliku `views/site/index.php` na wygenerowany łańcuch tekstowy.
 
-    ```mermaid
-        (the above MermaidJS code goes here)
-    ```
-You can see this in action, by [editing this page](https://github.com/akademia-slaska/template-repository/edit/main/README.md) 
-and looking at its source code.
+Na przykład, zamień takie coś:
 
-### Live editor
+    <h2>Base64 Converter</h2>
+    <h3>The Base64 online converter supports both functions of the algorithm on same page. If you need to encode a text to Base64, fill in the Text field and press Encode text to Base64 -- the result will appear in the Base64 field. Otherwise, if you have a Base64 string, paste it into the Base64 field and press Decode Base64 to text -- the result will appear in the Text field.<h3>
+    <h2>About Base64 online converter</h2>
+    <h3>Please note that this Base64 converter supports only main standard and decodes the data in strict mode. Perhaps this option does not suit your needs, and you want to encode text or decode Base64 using other variations of this algorithm. If so, please check the following online convertors. They are also simple and free, but they are sharpened for certain tasks.<h3>
 
-If you go to <https://mermaid.live/edit> you will gain access to an on-the-fly editor which allows you to render MermaidJS
-code directly.
+Na coś takiego:
 
-Unfold the _Actions_ section in the bottom-left corner to see some cools stuff like an ability to copy image to clipboard
-or download it in PNG or SVG format, load MermaidJS code to selected Gist etc.
+    PGgxPkJhc2U2NCBDb252ZXJ0ZXI8L2gyPg0KPGgzPlRoZSBCYXNlNjQgb25saW5lIGNvbnZlcnRlciBzdXBwb3J0cyBib3RoIGZ1bmN0aW9ucyBvZiB0aGUgYWxnb3JpdGhtIG9uIHNhbWUgcGFnZS4gSWYgeW91IG5lZWQgdG8gZW5jb2RlIGEgdGV4dCB0byBCYXNlNjQsIGZpbGwgaW4gdGhlIFRleHQgZmllbGQgYW5kIHByZXNzIEVuY29kZSB0ZXh0IHRvIEJhc2U2NCAtLSB0aGUgcmVzdWx0IHdpbGwgYXBwZWFyIGluIHRoZSBCYXNlNjQgZmllbGQuIE90aGVyd2lzZSwgaWYgeW91IGhhdmUgYSBCYXNlNjQgc3RyaW5nLCBwYXN0ZSBpdCBpbnRvIHRoZSBCYXNlNjQgZmllbGQgYW5kIHByZXNzIERlY29kZSBCYXNlNjQgdG8gdGV4dCAtLSB0aGUgcmVzdWx0IHdpbGwgYXBwZWFyIGluIHRoZSBUZXh0IGZpZWxkLjxoMz4NCjxoMj5BYm91dCBCYXNlNjQgb25saW5lIGNvbnZlcnRlcjwvaDI+DQo8aDM+UGxlYXNlIG5vdGUgdGhhdCB0aGlzIEJhc2U2NCBjb252ZXJ0ZXIgc3VwcG9ydHMgb25seSBtYWluIHN0YW5kYXJkIGFuZCBkZWNvZGVzIHRoZSBkYXRhIGluIHN0cmljdCBtb2RlLiBQZXJoYXBzIHRoaXMgb3B0aW9uIGRvZXMgbm90IHN1aXQgeW91ciBuZWVkcywgYW5kIHlvdSB3YW50IHRvIGVuY29kZSB0ZXh0IG9yIGRlY29kZSBCYXNlNjQgdXNpbmcgb3RoZXIgdmFyaWF0aW9ucyBvZiB0aGlzIGFsZ29yaXRobS4gSWYgc28sIHBsZWFzZSBjaGVjayB0aGUgZm9sbG93aW5nIG9ubGluZSBjb252ZXJ0b3JzLiBUaGV5IGFyZSBhbHNvIHNpbXBsZSBhbmQgZnJlZSwgYnV0IHRoZXkgYXJlIHNoYXJwZW5lZCBmb3IgY2VydGFpbiB0YXNrcy48aDM+
 
-### Mermaid Generator
+(kod base64 musi być wklejony w _jednej linijce_)
 
-The [mermaid.ink Generator](https://mermaid.ink/) service is a great addition to above! You can feed it with MermaidJS code
-and it will "convert" (render) it into an image. You'll get a regular URL pointing to an image, which you can embed anywhere
-that you wish, i.e.:
+Zapisz zmiany w pliku `views/site/index.php`, wróć do przeglądarki i odśwież
+stronę [`http://localhost:8080`](http://localhost:8080).
 
-- Use in GitHub as a static image instead of live editor
-- Use it in any external tool, service or website etc.
+## PRZYKŁAD
 
-To use URL-related functions, diagrams are first [encoded](https://docs.kroki.io/kroki/setup/encode-diagram/). This handled
-by _mermaid.live_ Live Editor itself.
+Jeśli wszystko poszło zgodnie z planem, w przeglądarce powinna pojawić się przykładowa strona WWW:
 
-### Other diagrams
+![Wynik działania](README-effect.jpg)
 
-Flowchart diagram presented above is just one of many that MermaidJS supports.
+To jest normalna, w pełni działąjąca strona WWW (która wykorzystuje HTML, CSS i JavaScript). Nawet pomimo faktu, że
+jeśli naciśniesz <kbd>Ctrl</kbd>+<kbd>U</kbd>, by wyświetlić źródło strony, zobaczysz coś podobnego do tego:
 
-The obvious ones (UML):
+![Kod źródłowy strony](README-source.jpg)
 
-- [Sequence Diagram](https://mermaid.live/edit#pako:eNptkLFqAzEMhl9F0VrfC9yQUujQFDp1K16E_V_OYFuJY1NCyLvXd9ds0fQjfZ9AurFTDx75gnNDdngPciySbKZebzE4DPv9y6fOeaQPxKi0ZEOz_pIU0FXb61N4w5zkBaEZUijhH11mQ0eH1emLw2YbOqzGSndt9xw_0AREOhZI3bHhhJIk-H7FbREs1xkJlscePSZpsVq2-d5RaVW_r9nxWEuD4XbyUh9HP5rwoWr52h6z_sfwSfKPakcmiRfc_wC26mTi)
-- [Class Diagram](https://mermaid.live/edit#pako:eNptkc9OwzAMxl8l8glE-wIVF8SYxGGn3aZKyE28LmrijPzRBGPvTlrWMDZySfyzP-uLfQTpFEED0mAIC429R9uyyOeJtUUjHr_qWiySHG7pUofdLd1Q5_EPbsSD5iiwp2u8jl5zL3piRf4yOUrCCm1-3t1fJSxGmuFke7J3_AGiNO0Ih2dnnC-JcNB2FubwPaEc5vh02W_8WOlXj96D_qRXXhLFgiXyC8Z_9dMIfg11zhmhw9tBG1WgT1y0UIElb1GrvIlJ10LckaUWmvxUtMVkYgstj6WYolt_sIQm-kQVpL3KEznvboakdHR-dV7ueFWwR944l0u2aAKdvgFIMZyC)
-- [Simple State Machine Diagram](https://mermaid.live/edit#pako:eNpdjz0LgzAQhv-K3Fh06ejQpV2d3No4HObUQD4kXoQi_vemCdJipofn3gv3btA7SVDDwsj0UDh6NNV6FbaI73Xpiqq6FS0rrbNKmGQcnlXjVmXHbDOf1__s3eMyZZvw-BRKMOQNKhnP2r4BATyRIQF1REkDBs0ChN1jFAO79m17qNkHKiHM8lfkkCQVO9_kpqlwCTPap3MxMqBeaP8ArztTOA)
+Czyli kompletne bagno.
 
-Some less often used:
+## UWAGI KOŃCOWE
 
-- [Entity Relation Diagram](https://mermaid.live/edit#pako:eNp10VFrgzAQB_CvEu5Z-wF8KxqGMOeIttCRl8ycbUCNpLEw1O--WA1bO5a3HL_7J9yNUGmJEAGaRImzES3viDvxoSjzjDIyT7vdNJKEvqZHyk7hPkkYLQoSkYu4PtlpCkM9kpwl7hKRvhEV_mPSt2OextQpDo0Snw2SWhsOq_7z2lOywQrVzWf7rAVNP6jSNzQbWWu_QZiWNHNKdVUzSB_1zvLkEJdhvC_pS85OvmWr31M7K1T36B_-55M5aCPRoHRvcIAAWjStUNINe1y6OdgLtshhoRJrMTR2GcDsqBisLr66CiJrBgxg6KWwuG3IF1Eqq0227u--xgB60X1o7UgtmivO35Pxk64)
-- [User Journey](https://mermaid.live/edit#pako:eNplULEKg0AM_ZWQ2aWULrdW6OTkVlyCl9arepEzR5HSf--pFSzNFN57eY-8F9ZiGQ0-JAbPU-UhjTrtGIoJnhJa5-9g6cuMXKsTDxcBlYVecYCCWgZlMnAyUPAGJ2EcRiUXRgPHPZOv9wYOM5rBmfQvo5F-72Tl6Tevn5TS6UJ-IzDDnkNPzqbPXrOoQm04eaFJq-UbxU4rrPw7SSmqlJOv0WiInGEcLCnnju6B-g1k61RCsZa1dJbhQP4qkiQ36kZ-fwCt22h_)
-- [Pie Diagram](https://mermaid.live/edit#pako:eNo1j8sKwjAQRX8lzLobEaVka7eC6E6yGZtpDeRFMhFK6b8bLZnV5XDg3llhDJpAQjQk2LAlcSPOAnWITFq8FvEJtngmSll5UU_BEOasQEhx7M-NXZB31p8aujd0OEEHjpJDo2vV-hMU8JscKZA1apqwWFag_FZVLBweix9BcirUQYkamQaDc0LXIGnDIV339f8nOojonyFUZUKbafsCDfBG3g)
+Przykładowa strona WWW (powyżej) jest oparta na [Pure](https://purecss.io/).
 
-The [User Journey](https://mermaid.live/edit#pako:eNplULEKg0AM_ZWQ2aWULrdW6OTkVlyCl9arepEzR5HSf--pFSzNFN57eY-8F9ZiGQ0-JAbPU-UhjTrtGIoJnhJa5-9g6cuMXKsTDxcBlYVecYCCWgZlMnAyUPAGJ2EcRiUXRgPHPZOv9wYOM5rBmfQvo5F-72Tl6Tevn5TS6UJ-IzDDnkNPzqbPXrOoQm04eaFJq-UbxU4rrPw7SSmqlJOv0WiInGEcLCnnju6B-g1k61RCsZa1dJbhQP4qkiQ36kZ-fwCt22h_)-type 
-diagram can be used in many scenarios. For example, to denote results of some poll etc. in more complex / other form than
-[Pie Diagram](https://mermaid.live/edit#pako:eNo1j8sKwjAQRX8lzLobEaVka7eC6E6yGZtpDeRFMhFK6b8bLZnV5XDg3llhDJpAQjQk2LAlcSPOAnWITFq8FvEJtngmSll5UU_BEOasQEhx7M-NXZB31p8aujd0OEEHjpJDo2vV-hMU8JscKZA1apqwWFag_FZVLBweix9BcirUQYkamQaDc0LXIGnDIV339f8nOojonyFUZUKbafsCDfBG3g)
-offers.
+Wykorzystano przykład z
+folderu [`pure/site/static/layouts/side-menu/`](https://github.com/pure-css/pure/tree/master/site/static/layouts/side-menu).
+Dokonano jedynie zmiany, polegającej na tym, że każdy wymagany zewnętrzny plik został osadzony bezpośrednio w
+pliku [`index.html`](https://github.com/telecare-poland/test-algorytmu-base64/blob/main/source/side-menu-oneliner/index.html).
 
-All mentioned diagram types can be used anywhere within GitHub (in [issues](https://github.com/ninergames/test-renpy-engine/issues/23), [discussions](https://github.com/ninergames/test-renpy-engine/discussions/21) and [even in text files](https://github.com/ninergames/test-renpy-engine)).
+Treść strony została następnie zakodowana (przy użyciu [Base64 Converter](https://base64.guru/converter)) i umieszczona
+w
+pliku [`views\site\index.php`](https://github.com/telecare-poland/test-algorytmu-base64/blob/main/views/site/index.php).
 
-### Kroki.io service
-
-We can use this service for:
-
-- All other diagram types that MermaidJS doesn't support
-- All diagrams that for some reason we want to generate in other language than MermaidJS
-
-In this case we will end up with the generated static image, which we must paste directly to GitHub.
-
-Some other diagrams (not available in MermaidJS) that are worth considering includes:
-
-- [MindMap diagram in PlantUML](https://kroki.io/examples.html#mind-map) (looks better than the one generated in MermaidJS)
-- [Syntax diagram in Pikchr](https://kroki.io/examples.html#syntax)
-- [Container diagram in C4 PlantUML](https://kroki.io/examples.html#c4-container) (for drawing system architectures)
-- [Component diagram in C4 PlantUML](https://kroki.io/examples.html#c4-component) (can be used for drawing nearly everything)
-- [Word Cloud diagram in Vega](https://kroki.io/examples.html#word-cloud) (more-like for marketing issues etc.)
-
-And many more. Kroki.io supports [20+ languages](https://kroki.io/#support) and for certain languages (but not for MermaidJS)
-it allows rendering diagrams in PDF or TXT formats or as base64-encoded streams.
-
-## Releases
-
-All the details are given in [Git Basics - Tagging](https://git-scm.com/book/en/v2/Git-Basics-Tagging) and [Managing releases in a repository](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository).
-
-In short:
-
-1. Make a tag:
-    * For exiting commit:
-        * List all commits: `git log --pretty=oneline`
-        * Pick the one you wish to tag (first seven letters of the has are enough), i.e.: `32c274c`
-        * Add a tag: `git tag -a 0.1 32c274c -m "First version before general refactor"`
-    * For latest commit: `git tag -a 1.4 -m "My version 1.4"`
-    * Please, **do not** use `v1.0` scheme;
-        * A version is a version, no need to prepend number with `v`
-        * Even if [GitHub claims](https://github.com/akademia-slaska/template-repository/releases/new) that this is a common practice to do so
-    * Use [Semantic Versioning 2.0.0](https://semver.org/) (three numbers) whenever possible
-2. Push tag(s) to GitHub: `git push --tags`
-3. Create [a new release](https://github.com/akademia-slaska/template-repository/releases/new): pick a tag, add title and a description, add some binaries, set options
-4. Publish a release or save it as a draft.
-
-GitHub **always adds a source code** to release. We **must always treat** all our releases **purely as private**.
-
-Note that `git push --tags` pushes tags **only**. If you have some unpushed commits in the same time, you should send them next, using regular `git push`.
-
-## Table of Contents
-
-As you can see, this README file is really long, logically separated into many sections and subsections. We need to have 
-an option to generate table of contents in such case.
-
-GitHub handles this for us. It auto-generates TOCs [for README file](https://github.blog/changelog/2021-04-13-table-of-contents-support-in-markdown-files/)
-and for [Wiki pages](https://twitter.com/github/status/1428466581554745352).
-
-You can browse contests of this document by clicking the _Contents_ button to the left of this document title:
-
-![Example of table of contents feature in GitHub for readme files](https://th.bing.com/th/id/R.044342b491180a79ff75a058c96b6a29?rik=u9%2bWqKLY34TseA&riu=http%3a%2f%2fdocs.github.com%2fassets%2fimages%2fhelp%2frepository%2freadme-automatic-toc.png&ehk=kudK3FMT5GIYv4PsH6YVdKBtxt3qi37dhmQq9fhelEo%3d&risl=&pid=ImgRaw&r=0)
-
-Or you can get a [manually-generated in-line TOCs](https://ecotrust-canada.github.io/markdown-toc/) and copy-paste it to
-and file, issue, doc or text.
+Wykorzystane źródła (wersja oryginalna i przerobiona do _jedno-linijkowca_) są w
+folderze [`source`](https://github.com/telecare-poland/test-algorytmu-base64/tree/main/source) w tym repozytorium.
